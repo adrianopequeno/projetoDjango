@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Transações</title>
+</head>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+}
+        .btn{
+            background: -webkit-linear-gradient(bottom, #E0E0E0, #F9F9F9 70%);
+            background: -moz-linear-gradient(bottom, #E0E0E0, #F9F9F9 70%);
+            background: -o-linear-gradient(bottom, #E0E0E0, #F9F9F9 70%);
+             background: -ms-linear-gradient(bottom, #E0E0E0, #F9F9F9 70%);
+             background: linear-gradient(bottom, #E0E0E0, #F9F9F9 70%);
+             border: 1px solid #CCCCCE;
+             border-radius: 3px;
+             box-shadow: 0 3px 0 rgba(0, 0, 0, .3),
+                           0 2px 7px rgba(0, 0, 0, 0.2);
+             color: #616165;
+<!--             display: block;-->
+             font-family: "Trebuchet MS";
+             font-size: 14px;
+             font-weight: bold;
+             line-height: 25px;
+             text-align: center;
+             text-decoration: none;
+             text-transform: uppercase;
+             text-shadow:1px 1px 0 #FFF;
+             padding: 5px 15px;
+             position: relative;
+             width: 80px;
+
+           }
+           div{
+           margin: 50px;
+           }
+           table, th, td {
+              border: 1px solid black;
+           }
+           table {
+            width: 100%;
+           }
+    </style>
+<body>
+    <h1>Bem vindo as Transações</h1>
+
+    <ul>
+    {% for transacao in transacoes %}
+        <li>
+            {{ transacao.description }} -
+            {{ transacao.data }} -
+            {{ transacao.valor }} -
+            {{ transacao.categoria }}
+            <a class="btn" href="{% url 'url_atualizar' transacao.id %}">ATUALIZAR</a>
+            <a class="btn" href="{% url 'url_deletar' transacao.id %}">DELETAR</a>
+<!--            <form action="{% url 'url_atualizar' transacao.id %}">-->
+<!--                <BUTTON >ATUALIZAR</BUTTON>-->
+<!--            </form>-->
+        </li>
+    {% endfor %}
+    </ul>
+
+    <a href="{% url 'url_nova' %}">Nova Transacao</a>
+
+    <br>
+    <br>
+    <div>
+        <table>
+            <tr>
+                <th>Data</th>
+                <th>Valor</th>
+                <th>Descricao</th>
+                <th>Categoria</th>
+                <th>Ações</th>
+            </tr>
+                {% for transacao in transacoes %}
+            <tr>
+                    <td>{{ transacao.data }}</td>
+                    <td>{{ transacao.valor }}</td>
+                    <td>{{ transacao.description }}</td>
+                    <td>{{ transacao.categoria }}</td>
+                    <td style="display: flex; justify-content: space-around;">
+                        <a class="btn" href="{% url 'url_atualizar' transacao.id %}" style="color:blue;" >ATUALIZAR</a>
+                        <a class="btn" href="{% url 'url_deletar' transacao.id %}" style="color:red;">DELETAR</a>
+                    </td>
+            </tr>
+                {% endfor %}
+        </table>
+
+        <br>
+        <a class="btn" href="{% url 'url_nova' %}" style="color:green;">Nova Transacao</a>
+    </div>
+</body>
+</html>
